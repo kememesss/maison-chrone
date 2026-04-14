@@ -83,7 +83,7 @@ export function FeaturedCarouselSection({
 
               return (
                 <div
-                  key={slideIdx}
+                  key={colIdx}
                   data-hero-col
                   className={`flex items-center justify-center ${isCenter
                       ? "w-[min(80vw,500px)]"

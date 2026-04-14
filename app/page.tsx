@@ -179,7 +179,9 @@ export default function Home() {
           setActiveCategory={setActiveCategory}
         />
 
-        <BookNowSection />
+        <div className="h-screen">
+          <BookNowSection />
+        </div>
 
       </main>
       <SiteFooter />
