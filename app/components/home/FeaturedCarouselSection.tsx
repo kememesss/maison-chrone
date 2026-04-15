@@ -5,9 +5,16 @@ import Image from "next/image";
 import { heroSlides, serif } from "./homeData";
 
 type Props = {
+  heroIndex?: number;
+  heroPhase?: "idle" | "next" | "prev";
+  heroLen?: number;
+  heroTx?: number;
+  heroTransition?: boolean;
+  heroTrackRef?: React.RefObject<HTMLDivElement | null>;
   setHeroAutoplayPaused: (v: boolean) => void;
-  heroAutoplayPaused: boolean;
-  goHero?: (dir: number) => void;
+  onHeroTrackTransitionEnd?: (e: React.TransitionEvent<HTMLDivElement>) => void;
+  heroAutoplayPaused?: boolean;
+  goHero?: (dir: -1 | 1) => void;
   onSelectSlide?: (index: number) => void;
 };
 
