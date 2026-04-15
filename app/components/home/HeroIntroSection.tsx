@@ -18,14 +18,12 @@ export function HeroIntroSection() {
 
       <div className="flex items-end gap-8">
         <h1
-          className="ml-20 max-w-[14ch] text-[clamp(3rem,12vw,7.5rem)] font-light leading-[0.95] tracking-[0.06em] text-stone-900 uppercase md:ml-28"
+          className="ml-20 max-w-[14ch] text-[clamp(3rem,12vw,7.5rem)] font-light leading-[0.95] tracking-[0.06em] text-stone-900 uppercase md:ml-28 mb-10"
           style={serif}
         >
           Chrone
         </h1>
-        <p className="mb-4 text-sm italic text-[var(--accent)] md:mb-5">
-          "To be irreplaceable, one must be different"
-        </p>
+       
       </div>
 
 
@@ -73,9 +71,9 @@ export function HeroIntroSection() {
               </span>
             </a>
 
-            <button className="btn-luxury w-full max-w-64 py-3">
+            <a href="#book-now" className="btn-luxury inline-flex w-full max-w-64 justify-center py-3">
               Book now!
-            </button>
+            </a>
 
           </div>
 

@@ -181,10 +181,10 @@ export default function Home() {
 
         <div className="h-screen">
           <BookNowSection />
+        <SiteFooter />
         </div>
 
       </main>
-      <SiteFooter />
     </div>
   );
 }

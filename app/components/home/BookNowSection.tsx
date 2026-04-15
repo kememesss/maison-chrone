@@ -5,7 +5,7 @@ export function BookNowSection() {
     "mt-1.5 w-full rounded-xl border border-[#b9ac98]/35 bg-[#171412]/80 px-4 py-2.5 text-[13px] text-stone-100 placeholder:text-stone-500 transition focus:border-[#c9bba5]/80 focus:outline-none focus:ring-2 focus:ring-[#c9bba5]/30";
 
   return (
-    <section className="flex min-h-screen items-center justify-center bg-[#ebe6dc]/45 px-6 py-14">
+    <section id="book-now" className="flex min-h-screen scroll-mt-28 items-center justify-center bg-[#ebe6dc]/45 px-6 py-14">
       <div className="w-full max-w-7xl rounded-[28px] border border-[#b9ac98]/30 bg-linear-to-br from-[#211c18] via-[#171412] to-[#120f0d] p-8 text-white shadow-[0_30px_70px_-35px_rgba(0,0,0,0.75)] md:p-10">
         {/* Title */}
         <h2
