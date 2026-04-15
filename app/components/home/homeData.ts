@@ -67,12 +67,12 @@ export const products: {
     image: "/images/carousel/King Seiko SPB457J1.webp",
   },
   {
-    name: "Lacoste SPORT 2011385 Automatic Mens Watch",
-    category: ["all", "female watch"],
+    name: "Lacoste Boston Ionic Plated Stainless Steel",
+    category: ["all", "male watch"],
     blurb: "lorem ipsum dolor sit amet consectetur adipisicing elit. ",
     swatch: "from-[#ece8e0] via-[#d8d2c6] to-[#b8b0a4]",
 
-    image: "/images/carousel/Lacoste SPORT 2011385 Automatic Mens Watch.jpg",
+    image: "/images/carousel/lacoste mens boston ionic plated stainless steel watch.webp",
   },
   {
     name: "Women's Designer Watches",
