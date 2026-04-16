@@ -15,19 +15,8 @@ export function Navbar() {
             Maison Chrone
           </span>
         </a>
-        <div className="hidden flex-1 justify-center md:flex">
-          <div className="flex w-full max-w-sm items-center gap-3 border-b border-stone-300/90 pb-2 transition focus-within:border-stone-800">
-            <SearchIcon />
-            <span className="sr-only">Search</span>
-          </div>
-        </div>
-        <button
-          type="button"
-          className="btn-luxury btn-luxury-ghost h-11 w-11 p-0 text-stone-800"
-          aria-label="Open menu"
-        >
-          <MenuIcon />
-        </button>
+
+        
       </div>
     </header>
   );
