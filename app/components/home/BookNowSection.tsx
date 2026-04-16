@@ -2,11 +2,15 @@ import { serif } from "./homeData";
 
 export function BookNowSection() {
   const fieldClassName =
-    "mt-1.5 w-full rounded-xl border border-[#b9ac98]/35 bg-[#171412]/80 px-4 py-2.5 text-[13px] text-stone-100 placeholder:text-stone-500 transition focus:border-[#c9bba5]/80 focus:outline-none focus:ring-2 focus:ring-[#c9bba5]/30";
+    "mt-1.5 w-full h-[44px] min-h-[44px] rounded-xl border border-[#b9ac98]/35 bg-[#171412]/80 px-4 text-[13px] text-stone-100 placeholder:text-stone-500 transition focus:border-[#c9bba5]/80 focus:outline-none focus:ring-2 focus:ring-[#c9bba5]/30";
 
   return (
-    <section id="book-now" className="flex min-h-screen scroll-mt-28 items-center justify-center bg-[#ebe6dc]/45 px-6 py-14">
+    <section
+      id="book-now"
+      className="flex min-h-screen scroll-mt-28 items-center justify-center bg-[#ebe6dc]/45 px-6 py-14"
+    >
       <div className="w-full max-w-7xl rounded-[28px] border border-[#b9ac98]/30 bg-linear-to-br from-[#211c18] via-[#171412] to-[#120f0d] p-8 text-white shadow-[0_30px_70px_-35px_rgba(0,0,0,0.75)] md:p-10">
+        
         {/* Title */}
         <h2
           className="mb-2 text-center text-3xl text-[#f2ece4] md:text-4xl"
@@ -14,13 +18,17 @@ export function BookNowSection() {
         >
           Book a Site Visit
         </h2>
+
         <p className="mb-8 text-center text-[11px] uppercase tracking-[0.25em] text-[#c4b8a5]">
           Private showroom experience
         </p>
 
         {/* Form + Location */}
         <form className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_1.1fr]">
+          
+          {/* LEFT SIDE - FORM */}
           <div className="flex flex-col gap-4">
+            
             <div>
               <label className="text-xs uppercase tracking-[0.18em] text-[#b9ad99]">
                 Email
@@ -42,18 +50,29 @@ export function BookNowSection() {
               <input type="text" className={fieldClassName} />
             </div>
 
-            <div>
-              <label className="text-xs uppercase tracking-[0.18em] text-[#b9ad99]">
-                Date
-              </label>
-              <input type="date" className={fieldClassName} />
-            </div>
+            {/* DATE + TIME (fixed mobile spacing) */}
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              
+              <div>
+                <label className="text-xs uppercase tracking-[0.18em] text-[#b9ad99]">
+                  Date
+                </label>
+                <input
+                  type="date"
+                  className={`${fieldClassName} appearance-none`}
+                />
+              </div>
 
-            <div>
-              <label className="text-xs uppercase tracking-[0.18em] text-[#b9ad99]">
-                Time
-              </label>
-              <input type="time" className={fieldClassName} />
+              <div>
+                <label className="text-xs uppercase tracking-[0.18em] text-[#b9ad99]">
+                  Time
+                </label>
+                <input
+                  type="time"
+                  className={`${fieldClassName} appearance-none`}
+                />
+              </div>
+
             </div>
 
             <button type="submit" className="btn-luxury mt-3 w-full">
@@ -61,14 +80,18 @@ export function BookNowSection() {
             </button>
           </div>
 
+          {/* RIGHT SIDE - LOCATION */}
           <div className="flex flex-col gap-4">
+            
             <div className="rounded-2xl border border-[#b9ac98]/25 bg-[#161210]/55 p-5">
               <p className="text-[11px] uppercase tracking-[0.25em] text-[#c4b8a5]">
                 Location
               </p>
+
               <h3 className="mt-2 text-lg text-[#f2ece4]" style={serif}>
                 Maison Chroné Showroom
               </h3>
+
               <p className="mt-2 text-sm leading-relaxed text-stone-300/90">
                 12 Rue des Rosiers, Le Marais
                 <br />
@@ -76,7 +99,9 @@ export function BookNowSection() {
               </p>
             </div>
 
+            {/* MAP PREVIEW */}
             <div className="relative min-h-[320px] overflow-hidden rounded-2xl border border-[#b9ac98]/25 bg-[radial-gradient(circle_at_30%_20%,rgba(219,194,157,0.12),transparent_48%),linear-gradient(160deg,#1f1a16_0%,#151210_100%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]">
+              
               <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(185,172,152,0.2)_1px,transparent_1px),linear-gradient(90deg,rgba(185,172,152,0.2)_1px,transparent_1px)] bg-size-[28px_28px] opacity-35" />
 
               <div className="absolute inset-0 flex items-center justify-center">
@@ -96,15 +121,10 @@ export function BookNowSection() {
                 Pin Location Preview
               </p>
             </div>
+
           </div>
         </form>
-
       </div>
-
-
-
-
-
     </section>
   );
 }
