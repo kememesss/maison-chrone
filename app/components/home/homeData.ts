@@ -21,7 +21,7 @@ export const products: {
 }[] = [
   {
     name: "Emporio Armani",
-    category: ["all", "new releases"],
+    category: ["best sellers", "male watch"],
     blurb: "lorem ipsum dolor sit amet consectetur adipisicing elit. ",
     swatch: "from-[#9aa89a] via-[#7d8c7c] to-[#5a6658]",
     image: "/images/carousel/Emporio Armani.webp",
@@ -36,7 +36,7 @@ export const products: {
   },
   {
     name: "Lacoste Ladycroc",
-    category: ["all", "new releases"],
+    category: ["best sellers", "female watch"],
     blurb: "lorem ipsum dolor sit amet consectetur adipisicing elit. ",
     swatch: "from-[#c9a090] via-[#a67b6c] to-[#6e4a42]",
 
@@ -52,7 +52,7 @@ export const products: {
   },
   {
     name: "Lacoste Green Silicone",
-    category: ["all", "best sellers"],
+    category: [ "best sellers"],
     blurb: "lorem ipsum dolor sit amet consectetur adipisicing elit. ",
     swatch: "from-[#b5ab9e] via-[#8f8578] to-[#5c554d]",
 
@@ -76,7 +76,7 @@ export const products: {
   },
   {
     name: "Women's Designer Watches",
-    category: ["all", "best sellers"],
+    category: ["all", "female watch"],
     blurb: "lorem ipsum dolor sit amet consectetur adipisicing elit. ",
     swatch: "from-[#9a9098] via-[#756b75] to-[#4a4248]",
 
