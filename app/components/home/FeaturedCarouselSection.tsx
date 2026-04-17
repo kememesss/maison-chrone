@@ -153,7 +153,13 @@ export function FeaturedCarouselSection({
     >
       {/* BACKGROUND */}
       <div className="absolute inset-0 scale-110 blur-3xl opacity-30">
-        <Image src={activeSlide.image} alt="" fill className="object-cover" />
+        <Image
+          src={activeSlide.image}
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover"
+        />
       </div>
 
       {/* TITLE */}
@@ -213,6 +219,7 @@ export function FeaturedCarouselSection({
                   src={slide.image}
                   alt={slide.alt}
                   fill
+                  sizes="(max-width: 768px) 92vw, 460px"
                   className="object-cover"
                   priority={i === centerIndex}
                 />

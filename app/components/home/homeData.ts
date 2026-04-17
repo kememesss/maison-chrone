@@ -48,7 +48,7 @@ export const products: Product[] = [
     category: "Lacoste",
     price: 5900,
     swatch: "from-[#a8a8a6] via-[#7a7976] to-[#4a4846]",
-    image: "/images/carousel/lacoste tr90.webp",
+    image: "/images/carousel/lacoste_tr90-removebg-preview.png",
   },
   {
     name: "Lacoste Green Silicone",
@@ -103,22 +103,22 @@ export function heroColumnIndices(
 export const heroSlides: { alt: string; image: string }[] = [
   {
     alt: "Featured watch — Emporio Armani",
-    image: "/images/carousel/Emporio Armani.webp",
+    image: "/images/carousel/Emporio_Armani-removebg-preview.png",
   },
   {
     alt: "Featured watch — Seiko 5",
-    image: "/images/carousel/seiko 5.webp",
+    image: "/images/carousel/seiko_5-removebg-preview.png",
   },
   {
     alt: "Featured eyewear — Lacoste Ladycroc",
-    image: "/images/carousel/lacoste ladycroc.webp",
+    image: "/images/carousel/lacoste_ladycroc-removebg-preview.png",
   },
   {
     alt: "Featured eyewear — Lacoste TR90",
-    image: "/images/carousel/lacoste tr90.webp",
+    image: "/images/carousel/lacoste_tr90-removebg-preview.png",
   },
   {
     alt: "Featured eyewear — Lacoste Green Silicone",
-    image: "/images/carousel/lacoste green silicone.webp",
+    image: "/images/carousel/lacoste_green_silicone-removebg-preview.png",
   },
 ];

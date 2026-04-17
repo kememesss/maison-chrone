@@ -36,6 +36,7 @@ export function HeroIntroSection() {
               src="/images/IMG_3438.webp"
               alt="Maison Chrone"
               fill
+              loading="eager"
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 28rem"
             />
