@@ -19,6 +19,7 @@ export function FeaturedCarouselSection({
 }: Props) {
   const [slides, setSlides] = useState(heroSlides);
   const isAnimating = useRef(false);
+  const animatingOffset = useRef(0);
 
   // drag
   const startX = useRef(0);
@@ -30,6 +31,11 @@ export function FeaturedCarouselSection({
   const STEP = SLIDE_W + GAP;
 
   const [offset, setOffset] = useState(0);
+  const DRAG_MAX = STEP * 0.65;
+  const SNAP_THRESHOLD = STEP * 0.18;
+  const CAROUSEL_EASE = "cubic-bezier(0.2, 0.9, 0.25, 1)";
+  const CAROUSEL_DURATION_MS = 720;
+  const SNAP_BACK_MS = 340;
 
   // =========================
   // SHIFT (INFINITE)
@@ -54,26 +60,27 @@ export function FeaturedCarouselSection({
   const next = useCallback(() => {
     if (isAnimating.current) return;
     isAnimating.current = true;
-    setOffset(-STEP);
+    animatingOffset.current = -STEP;
+    setOffset(animatingOffset.current);
     goHero?.(1);
   }, [STEP, goHero]);
 
   const prev = useCallback(() => {
     if (isAnimating.current) return;
     isAnimating.current = true;
-    setOffset(STEP);
+    animatingOffset.current = STEP;
+    setOffset(animatingOffset.current);
     goHero?.(-1);
   }, [STEP, goHero]);
 
-  // smoother commit (delayed)
-  const commit = useCallback(() => {
-    setTimeout(() => {
-      if (offset < 0) shiftNext();
-      if (offset > 0) shiftPrev();
-      setOffset(0);
-      isAnimating.current = false;
-    }, 20);
-  }, [offset, shiftNext, shiftPrev]);
+  const commitSlideShift = useCallback(() => {
+    if (!isAnimating.current) return;
+    if (animatingOffset.current < 0) shiftNext();
+    if (animatingOffset.current > 0) shiftPrev();
+    animatingOffset.current = 0;
+    setOffset(0);
+    isAnimating.current = false;
+  }, [shiftNext, shiftPrev]);
 
   // =========================
   // DRAG
@@ -88,18 +95,20 @@ export function FeaturedCarouselSection({
   const onPointerMove = (e: React.PointerEvent) => {
     if (!dragging.current || isAnimating.current) return;
     const delta = e.clientX - startX.current;
-    setOffset(currentX.current + delta);
+    const clamped = Math.max(
+      -DRAG_MAX,
+      Math.min(DRAG_MAX, currentX.current + delta)
+    );
+    setOffset(clamped);
   };
 
   const onPointerUp = () => {
     if (!dragging.current) return;
     dragging.current = false;
 
-    const threshold = STEP * 0.15;
-
-    if (offset < -threshold) {
+    if (offset < -SNAP_THRESHOLD) {
       next();
-    } else if (offset > threshold) {
+    } else if (offset > SNAP_THRESHOLD) {
       prev();
     } else {
       setOffset(0);
@@ -163,15 +172,19 @@ export function FeaturedCarouselSection({
           className="flex items-center gap-8 will-change-transform touch-none cursor-grab active:cursor-grabbing"
           style={{
             transform: `translate3d(${offset}px,0,0)`,
-            transition: isAnimating.current
-              ? "transform 800ms cubic-bezier(0.22,1,0.36,1)"
-              : "none",
+            transition:
+              isAnimating.current
+                ? `transform ${CAROUSEL_DURATION_MS}ms ${CAROUSEL_EASE}`
+                : offset !== 0
+                  ? `transform ${SNAP_BACK_MS}ms ${CAROUSEL_EASE}`
+                  : "none",
           }}
           onPointerDown={onPointerDown}
           onPointerMove={onPointerMove}
           onPointerUp={onPointerUp}
           onPointerCancel={onPointerUp}
-          onTransitionEnd={commit}
+          onPointerLeave={onPointerUp}
+          onTransitionEnd={commitSlideShift}
         >
           {slides.map((slide, i) => {
             const centerIndex = 2;
@@ -193,7 +206,7 @@ export function FeaturedCarouselSection({
                   filter: `blur(${Math.abs(d) * 0.6}px)`,
                   zIndex: 10 - Math.abs(d),
                   transition:
-                    "transform 800ms cubic-bezier(0.22,1,0.36,1), opacity 800ms ease, filter 800ms ease",
+                    `transform ${CAROUSEL_DURATION_MS}ms ${CAROUSEL_EASE}, opacity ${CAROUSEL_DURATION_MS}ms ease, filter ${CAROUSEL_DURATION_MS}ms ease`,
                 }}
               >
                 <Image

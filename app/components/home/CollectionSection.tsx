@@ -39,7 +39,7 @@ export function CollectionSection({
       </p>
 
       {/* ================= CATEGORY FILTER ================= */}
-      <div className="mt-8 rounded-[var(--radius-lg)] bg-[#1a1816] p-2 shadow-[var(--shadow-soft)] ring-1 ring-stone-900/20 md:mt-10 md:p-2.5">
+      <div className="mt-8 rounded-lg bg-[#1a1816] p-2 shadow-(--shadow-soft) ring-1 ring-stone-900/20 md:mt-10 md:p-2.5">
 
         {/* MOBILE */}
         <div className="flex flex-col gap-2 md:hidden">
@@ -55,12 +55,12 @@ export function CollectionSection({
                   onClick={() => setActiveCategory(cat)}
                   className={`
                     flex-1 rounded-full px-4 py-2
-                    text-[11px] uppercase tracking-[0.1em]
+                    text-[11px] uppercase tracking-widest
                     transition-all
 
                     ${
                       active
-                        ? "bg-[#f7f5f1] text-stone-900 ring-1 ring-[var(--accent)]/40"
+                        ? "bg-[#f7f5f1] text-stone-900 ring-1 ring-(--accent)/40"
                         : "border border-white/[0.14] text-stone-300"
                     }
                   `}
@@ -82,12 +82,12 @@ export function CollectionSection({
                   onClick={() => setActiveCategory(cat)}
                   className={`
                     w-1/2 rounded-full px-4 py-2
-                    text-[11px] uppercase tracking-[0.1em]
+                    text-[11px] uppercase tracking-widest
                     transition-all
 
                     ${
                       active
-                        ? "bg-[#f7f5f1] text-stone-900 ring-1 ring-[var(--accent)]/40"
+                        ? "bg-[#f7f5f1] text-stone-900 ring-1 ring-(--accent)/40"
                         : "border border-white/[0.14] text-stone-300"
                     }
                   `}
@@ -111,12 +111,12 @@ export function CollectionSection({
                 onClick={() => setActiveCategory(cat)}
                 className={`
                   rounded-full px-6 py-2
-                  text-[13px] uppercase tracking-[0.1em]
+                  text-[13px] uppercase tracking-widest
                   transition-all
 
                   ${
                     active
-                      ? "bg-[#f7f5f1] text-stone-900 ring-1 ring-[var(--accent)]/40"
+                      ? "bg-[#f7f5f1] text-stone-900 ring-1 ring-(--accent)/40"
                       : "border border-white/[0.14] text-stone-300"
                   }
                 `}
@@ -145,12 +145,12 @@ export function CollectionSection({
             <div
               className="
                 relative w-full overflow-hidden
-                rounded-[var(--radius-image)]
+                rounded-(--radius-image)
                 bg-stone-100
-                shadow-[var(--shadow-card)]
-                ring-1 ring-stone-900/[0.05]
+                shadow-(--shadow-card)
+                ring-1 ring-stone-900/5
                 transition duration-500
-                group-hover:shadow-[var(--shadow-soft)]
+                group-hover:shadow-(--shadow-soft)
               "
               style={{ aspectRatio: "3 / 4" }}
             >
@@ -166,7 +166,7 @@ export function CollectionSection({
             </div>
 
             {/* LABEL */}
-            <p className="mt-3 text-[9px] font-medium uppercase tracking-[0.2em] text-[var(--accent)] sm:mt-5 sm:text-[10px] sm:tracking-[0.25em]">
+            <p className="mt-3 text-[9px] font-medium uppercase tracking-[0.2em] text-(--accent) sm:mt-5 sm:text-[10px] sm:tracking-[0.25em]">
               Atelier
             </p>
 
