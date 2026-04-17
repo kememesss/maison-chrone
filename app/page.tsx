@@ -158,7 +158,9 @@ export default function Home() {
       <Navbar />
 
       <main>
+        <div className="min-h-screen">
         <HeroIntroSection />
+        </div>
 
         <FeaturedCarouselSection
           heroIndex={heroIndex}

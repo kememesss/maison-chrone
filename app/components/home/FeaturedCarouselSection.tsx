@@ -5,14 +5,7 @@ import Image from "next/image";
 import { heroSlides, serif } from "./homeData";
 
 type Props = {
-  heroIndex?: number;
-  heroPhase?: "idle" | "next" | "prev";
-  heroLen?: number;
-  heroTx?: number;
-  heroTransition?: boolean;
-  heroTrackRef?: React.RefObject<HTMLDivElement | null>;
   setHeroAutoplayPaused: (v: boolean) => void;
-  onHeroTrackTransitionEnd?: (e: React.TransitionEvent<HTMLDivElement>) => void;
   heroAutoplayPaused?: boolean;
   goHero?: (dir: -1 | 1) => void;
   onSelectSlide?: (index: number) => void;
@@ -25,10 +18,9 @@ export function FeaturedCarouselSection({
   onSelectSlide,
 }: Props) {
   const [slides, setSlides] = useState(heroSlides);
-
   const isAnimating = useRef(false);
 
-  // drag state
+  // drag
   const startX = useRef(0);
   const currentX = useRef(0);
   const dragging = useRef(false);
@@ -40,7 +32,7 @@ export function FeaturedCarouselSection({
   const [offset, setOffset] = useState(0);
 
   // =========================
-  // SHIFT LOGIC (infinite)
+  // SHIFT (INFINITE)
   // =========================
   const shiftNext = useCallback(() => {
     setSlides((prev) => {
@@ -57,12 +49,11 @@ export function FeaturedCarouselSection({
   }, []);
 
   // =========================
-  // NEXT / PREV
+  // NAVIGATION
   // =========================
   const next = useCallback(() => {
     if (isAnimating.current) return;
     isAnimating.current = true;
-
     setOffset(-STEP);
     goHero?.(1);
   }, [STEP, goHero]);
@@ -70,21 +61,22 @@ export function FeaturedCarouselSection({
   const prev = useCallback(() => {
     if (isAnimating.current) return;
     isAnimating.current = true;
-
     setOffset(STEP);
     goHero?.(-1);
   }, [STEP, goHero]);
 
+  // smoother commit (delayed)
   const commit = useCallback(() => {
-    if (offset < 0) shiftNext();
-    if (offset > 0) shiftPrev();
-
-    setOffset(0);
-    isAnimating.current = false;
+    setTimeout(() => {
+      if (offset < 0) shiftNext();
+      if (offset > 0) shiftPrev();
+      setOffset(0);
+      isAnimating.current = false;
+    }, 20);
   }, [offset, shiftNext, shiftPrev]);
 
   // =========================
-  // DRAG START
+  // DRAG
   // =========================
   const onPointerDown = (e: React.PointerEvent) => {
     dragging.current = true;
@@ -93,32 +85,22 @@ export function FeaturedCarouselSection({
     setHeroAutoplayPaused(true);
   };
 
-  // =========================
-  // DRAG MOVE
-  // =========================
   const onPointerMove = (e: React.PointerEvent) => {
     if (!dragging.current || isAnimating.current) return;
-
     const delta = e.clientX - startX.current;
     setOffset(currentX.current + delta);
   };
 
-  // =========================
-  // DRAG END
-  // =========================
   const onPointerUp = () => {
     if (!dragging.current) return;
-
     dragging.current = false;
 
-    const threshold = STEP * 0.25;
+    const threshold = STEP * 0.15;
 
     if (offset < -threshold) {
-      setOffset(-STEP);
-      isAnimating.current = true;
+      next();
     } else if (offset > threshold) {
-      setOffset(STEP);
-      isAnimating.current = true;
+      prev();
     } else {
       setOffset(0);
     }
@@ -127,14 +109,27 @@ export function FeaturedCarouselSection({
   };
 
   // =========================
-  // AUTO PLAY
+  // KEYBOARD
+  // =========================
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "ArrowRight") next();
+      if (e.key === "ArrowLeft") prev();
+    };
+
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [next, prev]);
+
+  // =========================
+  // AUTOPLAY
   // =========================
   useEffect(() => {
     if (heroAutoplayPaused) return;
 
     const id = setInterval(() => {
       if (!dragging.current) next();
-    }, 5000);
+    }, 6000);
 
     return () => clearInterval(id);
   }, [heroAutoplayPaused, next]);
@@ -153,21 +148,9 @@ export function FeaturedCarouselSection({
       </div>
 
       {/* TITLE */}
-      <div className="absolute top-6 sm:top-10 left-1/2 -translate-x-1/2 text-center z-20 px-4">
+      <div className="absolute top-10 left-1/2 -translate-x-1/2 text-center z-20 px-4">
         <h1
-          className="
-    max-w-lg
-    mt-10 sm:mt-0
-    text-2xl
-    sm:text-3xl
-    md:text-4xl md:mt-10
-    lg:text-5xl
-    font-light
-    tracking-[0.06em]
-    text-stone-900
-    uppercase
-    mb-6 sm:mb-10
-  "
+          className="text-3xl md:text-5xl font-light tracking-[0.06em] text-stone-900 uppercase"
           style={serif}
         >
           Featured Imagery
@@ -177,11 +160,11 @@ export function FeaturedCarouselSection({
       {/* CAROUSEL */}
       <div className="relative flex items-center justify-center">
         <div
-          className="flex items-center gap-8 will-change-transform touch-none"
+          className="flex items-center gap-8 will-change-transform touch-none cursor-grab active:cursor-grabbing"
           style={{
             transform: `translate3d(${offset}px,0,0)`,
             transition: isAnimating.current
-              ? "transform 700ms cubic-bezier(0.16,1,0.3,1)"
+              ? "transform 800ms cubic-bezier(0.22,1,0.36,1)"
               : "none",
           }}
           onPointerDown={onPointerDown}
@@ -204,13 +187,13 @@ export function FeaturedCarouselSection({
                     perspective(1200px)
                     translateZ(${Math.abs(d) * -80}px)
                     rotateY(${d * -8}deg)
-                    scale(${1 - Math.abs(d) * 0.08})
+                    scale(${1 - Math.abs(d) * 0.06})
                   `,
-                  opacity: 1 - Math.abs(d) * 0.25,
-                  filter: `blur(${Math.abs(d) * 1}px)`,
+                  opacity: 1 - Math.abs(d) * 0.2,
+                  filter: `blur(${Math.abs(d) * 0.6}px)`,
                   zIndex: 10 - Math.abs(d),
                   transition:
-                    "transform 700ms cubic-bezier(0.16,1,0.3,1), opacity 700ms, filter 700ms",
+                    "transform 800ms cubic-bezier(0.22,1,0.36,1), opacity 800ms ease, filter 800ms ease",
                 }}
               >
                 <Image
@@ -224,6 +207,23 @@ export function FeaturedCarouselSection({
             );
           })}
         </div>
+      </div>
+
+      {/* CONTROLS */}
+      <div className="absolute left-1/2 top-[calc(50%+34vh)] -translate-x-1/2 z-30 flex gap-6">
+        <button
+          onClick={prev}
+          className="w-12 h-12 flex items-center justify-center rounded-full bg-white/60 backdrop-blur-md text-stone-800 shadow-md hover:bg-white/90 hover:scale-105 active:scale-95 transition-all duration-300"
+        >
+          ←
+        </button>
+
+        <button
+          onClick={next}
+          className="w-12 h-12 flex items-center justify-center rounded-full bg-white/60 backdrop-blur-md text-stone-800 shadow-md hover:bg-white/90 hover:scale-105 active:scale-95 transition-all duration-300"
+        >
+          →
+        </button>
       </div>
     </section>
   );

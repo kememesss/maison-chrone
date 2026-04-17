@@ -4,43 +4,33 @@ import { serif } from "./homeData";
 export function HeroIntroSection() {
   return (
     <section className="mx-auto max-w-6xl px-5 pb-10 pt-12 md:px-10 md:pb-14 md:pt-20">
-      <p className="mb-4 text-[11px] font-medium uppercase tracking-[0.35em] text-[var(--accent)]">
+      <p className="text-center mb-4 text-[11px] font-medium uppercase tracking-[0.35em] text-[var(--accent)]">
         Est. atelier
       </p>
       <h1
-        className="max-w-[14ch] text-[clamp(3rem,12vw,7.5rem)] font-light leading-[0.95] tracking-[0.06em] text-stone-900 uppercase"
+        className="text-center text-[clamp(3rem,12vw,6rem)] font-light leading-[0.95] tracking-[0.06em] text-stone-900 uppercase"
         style={serif}
       >
-        Maison
+        Maison Chrone
       </h1>
 
 
 
-      <div className="flex items-end gap-8">
-        <h1
-          className="ml-20 max-w-[14ch] text-[clamp(3rem,12vw,7.5rem)] font-light leading-[0.95] tracking-[0.06em] text-stone-900 uppercase md:ml-28 mb-10"
-          style={serif}
-        >
-          Chrone
-        </h1>
-       
-      </div>
 
 
 
 
+      <p
+        className="text-lg text-center font-light leading-relaxed text-stone-700 md:text-xl"
+        style={serif}
+      >
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+      </p>
 
 
 
-      <div className="mt-3 h-px w-16 bg-gradient-to-r from-[var(--accent)] to-transparent md:mt-4 md:w-24" />
       <div className="mt-10 grid gap-12 md:mt-14 md:grid-cols-2 md:gap-20">
         <div className="flex max-w-md flex-col gap-8">
-          <p
-            className="text-lg font-light leading-relaxed text-stone-700 md:text-xl"
-            style={serif}
-          >
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-          </p>
           <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[var(--radius-image)] shadow-[var(--shadow-card)] ring-1 ring-stone-900/[0.05]">
             <Image
               src="/images/IMG_3438.webp"
