@@ -163,14 +163,7 @@ export default function Home() {
         </div>
 
         <FeaturedCarouselSection
-          heroIndex={heroIndex}
-          heroPhase={heroPhase}
-          heroLen={heroLen}
-          heroTx={heroTx}
-          heroTransition={heroTransition}
-          heroTrackRef={heroTrackRef}
           setHeroAutoplayPaused={setHeroAutoplayPaused}
-          onHeroTrackTransitionEnd={onHeroTrackTransitionEnd}
           onSelectSlide={setHeroIndex}
           goHero={goHero}
         />
